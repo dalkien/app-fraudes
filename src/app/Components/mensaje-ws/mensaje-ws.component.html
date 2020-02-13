@@ -1,0 +1,21 @@
+<!--<button data-toggle="modal" data-target="#mensajeWsModal" class="btn btn-white">Mensaje servidor</button>-->
+<div class="modal fade" id="mensajeWsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-danger modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="close('mensajeWsModal')" type="button" class="close" data-dismiss="modal" aria-label="Close" >
+          <span aria-hidden="true" class="white-text">
+            <i class="far fa-times-circle fa-lg white-ic"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body p-5">
+        <div class="text-center">
+          <h6 class="h6-responsive font-weight-bold" *ngIf="mensajeGet()" >{{mensajeServidor}}</h6>
+          <button data-dismiss="modal" (click)="close('mensajeWsModal')" 
+          class="btn btn-danger">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>

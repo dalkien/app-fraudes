@@ -1,0 +1,10 @@
+.modal-open {
+    background-color: #00000066;
+    overflow: auto;
+ }
+.close {
+    background-color: red;
+ }
+.modal-header {
+   background-color: red;
+}

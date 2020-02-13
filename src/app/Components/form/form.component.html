@@ -1,0 +1,85 @@
+<div class="container py-2">
+  <div class="row flex-center py-4">
+    <div class="col-md-10 white p-5 my-5 rounded rounded-lg ">
+      <h5 class="font-weight-bold mb-5 text-center">{{titulo}}</h5>
+      <form action="" autocomplete="off">
+        <label class="h5" for="opcionEnvio">Selecciona una opción de envío de PIN</label>
+        <select (change)="cambioSelectTipoEnvio($event)" [(ngModel)]="tipoEnvio" id="opcionEnvio" name="opcionEnvio"
+          required class="browser-default custom-select custom-select-lg red white-text">
+          <option class="white black-text" *ngFor="let opcion of opcionesTipoEnvio" value={{opcion.valor}}>
+            {{opcion.nombre}}
+          </option>
+        </select>
+        <div *ngIf="tipoEnvio=='1' as value; else opcionCorreo">
+          <div class="md-form md-outline form-lg">
+            <input mdbInput (keyup)="valSms($event)" (keypress)="validarSoloNumSms($event)" [(ngModel)]="veriSms.sms"
+              required id="sms" name="sms" class="form-control form-control-lg" type="number">
+            <label for="sms">Número de teléfono</label>
+          </div>
+          <div class="md-form md-outline form-lg">
+            <input mdbInput (keyup)="valSms($event)" (keypress)="validarSoloNumSms($event)"
+              [(ngModel)]="veriSms.smsConfirmar" required id="smsConf" name="smsConf"
+              class="form-control form-control-lg" type="number">
+            <label for="smsConf">Confirmar número de teléfono</label>
+          </div>
+          <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriSms.color}}">{{veriSms.mensaje}}</h6>
+        </div>
+        <ng-template #opcionCorreo>
+          <div class="md-form md-outline form-lg">
+            <input mdbInput (keypress)="validarEmail($event)" (keyup)="valiCorreo($event)" required id="correo"
+              name="correo" [(ngModel)]="veriCorreo.correo" class="form-control form-control-lg" type="email">
+            <label for="correo">Correo electrónico</label>
+          </div>
+          <div class="md-form md-outline form-lg">
+            <input mdbInput (keypress)="validarEmail($event)" (keyup)="valiCorreo($event)"
+              [(ngModel)]="veriCorreo.correoConfimar" required id="correoConf" name="correoConf"
+              class="form-control form-control-lg" type="email">
+            <label for="correoConf">Confirmar tu correo electrónico</label>
+          </div>
+          <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriCorreo.color}}">{{veriCorreo.mensaje}}</h6>
+        </ng-template>
+        <label class="h5" for="opcionDoc">Selecciona el tipo de documento</label>
+        <select (change)="cambioSelectTipoDoc($event)" [(ngModel)]="tipoDoc.select" id="opcionDoc" name="tipoDoc"
+          required class="browser-default custom-select custom-select-lg red white-text">
+          <option class="white black-text" *ngFor="let doc of tiposDocumento" value={{doc.valor}}>
+            {{doc.nombre}}
+          </option>
+        </select>
+        <div class="md-form md-outline form-lg">
+          <input mdbInput (keyup)="valNumDocumento($event)" 
+            [(ngModel)]="veriNumDoc.numero" required id="cedula" name="cedula"
+             class="form-control form-control-lg"
+            type="{{tipoDoc.type}}">
+          <label for="cedula">Número de documento</label>
+        </div>
+        <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriNumDoc.color}}">{{veriNumDoc.mensaje}}</h6>
+        <div class="text-left">
+          <div class="d-flex">
+            <div class="custom-control custom-switch">
+              <input (change)="changePoliticas($event)" required type="checkbox" class="custom-control-input"
+                id="confirmarPoliticas">
+              <label class="custom-control-label" for="confirmarPoliticas">Acepto política de uso de datos. </label>
+            </div>
+            <a data-toggle="modal" data-target="#politicasModal" (click)="openModal('politicasModal')"
+              class="text-primary font-weight-bold">Ver políticas
+              *</a>
+          </div>
+          <div class="custom-control custom-switch">
+            <input (change)="changeDatos($event)" required type="checkbox" class="custom-control-input"
+              id="confirmarDatos">
+            <label class="custom-control-label" for="confirmarDatos">Los datos ingresados corresponden a los registrados
+              dentro del sistema de CRM’s de la compañia</label>
+          </div>
+          <div class="py-4">
+            <button data-toggle="modal" data-target="#validarPinModal" [disabled]="!habilitarEnvio.boton"
+              (click)="sendPin($event); openModal('validarPinModal');" class="btn font-weight-bold btn-lg btn-danger"
+              type="submit">Enviar PIN</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-modal-politicas></app-modal-politicas>
+<app-validar-pin [generar]="generar"></app-validar-pin>
+<app-mensaje-ws></app-mensaje-ws>

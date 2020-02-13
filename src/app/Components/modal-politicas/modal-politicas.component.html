@@ -1,0 +1,26 @@
+<div class="modal fade" id="politicasModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-danger modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead font-weight-bold">Políticas</p>
+        <button (click)="close('politicasModal')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" ><i class="far fa-times-circle fa-lg white-ic"></i></span>
+        </button>
+      </div>
+      <div class="modal-body p-5">
+        <div class="text-center">
+          <h6 class="font-weight-bold">{{titulo}}</h6>
+        </div>
+        <div class="text-justify">
+          <h6>{{itemUno}}</h6>
+          <h6>{{itemDos}}</h6>
+          <h6>{{itemTres}} <a class="text-primary">{{urlClaro}}</a>.</h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="close('politicasModal')" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

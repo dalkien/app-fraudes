@@ -1,0 +1,7 @@
+{
+    "/WsVoiceTraffic-web/webresources/VoiceTraffic/*" : {
+        "target": "http://100.126.19.74:7001", 
+        "secure": "false",
+        "changeOrigin": true
+    }
+}
