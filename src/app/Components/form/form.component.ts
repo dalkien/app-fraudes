@@ -84,7 +84,7 @@ export class FormComponent implements OnInit {
     var propL = [] as Array<Propiedad>;
 
     prop1.nombre = "profileId";
-    prop1.valor = "SMTP_FS_TCRM1";
+    prop1.valor = "FRAUDECGW";
     prop2.nombre = "communicationOrigin";
     prop2.valor = "TCRM";
 
