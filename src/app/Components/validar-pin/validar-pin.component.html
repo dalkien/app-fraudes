@@ -2,9 +2,9 @@
   aria-hidden="true">
   <div class="modal-dialog modal-notify modal-danger modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header" >
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" (click)="close('validarPinModal')" >
+          <span aria-hidden="true" (click)="close('validarPinModal')">
             <i class="far fa-times-circle fa-lg white-ic"></i>
           </span>
         </button>
@@ -14,9 +14,9 @@
           <h6 *ngIf="valAcceso()" class="h6-responsive font-weight-bold">{{titulo}}</h6>
           <div *ngIf="validaFlux" class="md-form md-outline form-lg">
             <label class="h6" for="opcionDocVal">Selecciona el tipo de documento</label>
-            <br/> <br/>
-            <select [(ngModel)]="tipoDoc.select" id="opcionDocVal" name="tipoDocVal"
-              required class="browser-default custom-select custom-select-lg red white-text">
+            <br /> <br />
+            <select [(ngModel)]="tipoDoc.select" id="opcionDocVal" name="tipoDocVal" required
+              class="browser-default custom-select custom-select-lg red white-text">
               <option class="white black-text" *ngFor="let doc of tiposDocumento" value={{doc.valor}}>
                 {{doc.nombre}}
               </option>
@@ -28,19 +28,15 @@
             <label for="documentoId">Número de documento</label>
           </div>
           <div class="md-form md-outline form-lg">
-            <input mdbInput (keyup)="validarVacios($event)" 
-             [(ngModel)]="verificarCampos.pin" id="pinValidar" name="pinValidar"
-              class="form-control form-control-lg" type="text">
+            <input mdbInput (keyup)="validarVacios($event)" [(ngModel)]="verificarCampos.pin" id="pinValidar"
+              name="pinValidar" class="form-control form-control-lg" type="text">
             <label for="pinValidar">PIN de validación</label>
           </div>
-          <button [disabled]="!verificarCampos.boton" 
-          style="float:none; margin-left: 10px; margin-right: 10px;"
-          data-toggle="modal" data-target="#mensajeWsModal" 
-          (click)="validatePin('validarPinModal','mensajeWsModal')" 
-          class="btn btn-danger">Validar PIN</button>
-          <button class="btn btn-success" 
-          (click)="close('validarPinModal')" >Volver a enviar PIN</button>
+          <button [disabled]="!verificarCampos.boton" style="float:none; margin-left: 10px; margin-right: 10px;"
+            data-toggle="modal" data-target="#mensajeWsModal" (click)="validatePin('validarPinModal','mensajeWsModal')"
+            class="btn btn-danger">Validar PIN</button>
+          <button class="btn btn-success" (click)="close('validarPinModal')">Volver a enviar PIN</button>
         </div>
       </div>
     </div>
-</div>
+  </div>

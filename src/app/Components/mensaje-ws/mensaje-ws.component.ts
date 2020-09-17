@@ -16,25 +16,25 @@ export class MensajeWsComponent implements OnInit {
 
   ngOnInit() {
   }
-  
-  close(idModal: string){
+
+  close(idModal: string) {
     var modal = document.getElementById(idModal);
-    modal.style.display = "none" ;
+    modal.style.display = "none";
     modal.classList.add("fade");
-    document.body.style.overflow ="auto";
+    document.body.style.overflow = "auto";
     modal.classList.remove("modal-open");
     location.reload();
   }
-  
-  async mensajeGet(){
-    let pin = {} as Pin;
-  
-     pin =  this.servicePin.getRta(); 
 
-    if(pin != undefined ){
+  async mensajeGet() {
+    let pin = {} as Pin;
+
+    pin = this.servicePin.getRta();
+
+    if (pin != undefined) {
       this.mensajeServidor = pin.descripcionCode;
-      return true; 
-    }else{
+      return true;
+    } else {
       return false;
     }
 

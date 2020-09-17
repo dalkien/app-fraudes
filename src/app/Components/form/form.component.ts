@@ -10,7 +10,7 @@ import { Pin, PinGenerar, PinValidar, Propiedad, datosValida } from '../../Model
 export class FormComponent implements OnInit {
 
   generar: PinGenerar;
-  valDatos : datosValida;
+  valDatos: datosValida;
   titulo = 'Selecciona la opción de validación y completa tus datos';
 
   tipoEnvio = '1';
@@ -90,7 +90,7 @@ export class FormComponent implements OnInit {
     prop2.valor = "TCRM";
 
     this.valDatos.numId = this.veriNumDoc.numero;
-    this.valDatos.tipId = this.tiposDocumento[parseInt(this.tipoDoc.select) - 1].nombre; 
+    this.valDatos.tipId = this.tiposDocumento[parseInt(this.tipoDoc.select) - 1].nombre;
     genera.clienteId = this.tiposDocumento[parseInt(this.tipoDoc.select) - 1].nombre + this.veriNumDoc.numero;
     genera.medioEnvioId = this.tipoEnvio;
     genera.operacionId = "341";
@@ -114,8 +114,8 @@ export class FormComponent implements OnInit {
     document.body.style.overflow = "hidden";
     modal.classList.add("modal-open");
   }
-  
-  valPin(event){
+
+  valPin(event) {
     var genera = {} as PinGenerar;
     var prop1 = {} as Propiedad;
     var prop2 = {} as Propiedad;

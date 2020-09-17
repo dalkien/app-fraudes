@@ -46,10 +46,8 @@
           </option>
         </select>
         <div class="md-form md-outline form-lg">
-          <input mdbInput (keyup)="valNumDocumento($event)" 
-            [(ngModel)]="veriNumDoc.numero" required id="cedula" name="cedula"
-             class="form-control form-control-lg"
-            type="{{tipoDoc.type}}">
+          <input mdbInput (keyup)="valNumDocumento($event)" [(ngModel)]="veriNumDoc.numero" required id="cedula"
+            name="cedula" class="form-control form-control-lg" type="{{tipoDoc.type}}">
           <label for="cedula">Número de documento</label>
         </div>
         <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriNumDoc.color}}">{{veriNumDoc.mensaje}}</h6>
@@ -71,10 +69,9 @@
               dentro del sistema de CRM’s de la compañia</label>
           </div>
           <div class="py-4">
-            <button data-toggle="modal" style="float: left; margin-right: 10px;" 
-             data-target="#validarPinModal" [disabled]="!habilitarEnvio.boton"
-              (click)="sendPin($event); openModal('validarPinModal');" class="btn font-weight-bold btn-lg btn-danger"
-              type="submit">Enviar PIN</button>
+            <button data-toggle="modal" style="float: left; margin-right: 10px;" data-target="#validarPinModal"
+              [disabled]="!habilitarEnvio.boton" (click)="sendPin($event); openModal('validarPinModal');"
+              class="btn font-weight-bold btn-lg btn-danger" type="submit">Enviar PIN</button>
             <button data-toggle="modal" style="float: left;" data-target="#validarPinModal"
               (click)="valPin($event) ; openModal('validarPinModal');" class="btn font-weight-bold btn-lg btn-danger"
               type="submit">Validar PIN</button>

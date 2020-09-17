@@ -22,11 +22,11 @@ export class ModalPoliticasComponent implements OnInit {
   ngOnInit() {
   }
 
-  close(idModal: string){
+  close(idModal: string) {
     var modal = document.getElementById(idModal);
-    modal.style.display = "none" ;
+    modal.style.display = "none";
     modal.classList.add("fade");
-    document.body.style.overflow ="auto";
+    document.body.style.overflow = "auto";
     modal.classList.remove("modal-open");
   }
 
