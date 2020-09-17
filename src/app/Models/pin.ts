@@ -27,3 +27,8 @@ export interface Propiedad{
     nombre: string; 
     valor: string;
 }
+
+export interface datosValida{
+    numId: string; 
+    tipId: string; 
+}

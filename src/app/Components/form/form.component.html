@@ -71,9 +71,13 @@
               dentro del sistema de CRM’s de la compañia</label>
           </div>
           <div class="py-4">
-            <button data-toggle="modal" data-target="#validarPinModal" [disabled]="!habilitarEnvio.boton"
+            <button data-toggle="modal" style="float: left; margin-right: 10px;" 
+             data-target="#validarPinModal" [disabled]="!habilitarEnvio.boton"
               (click)="sendPin($event); openModal('validarPinModal');" class="btn font-weight-bold btn-lg btn-danger"
               type="submit">Enviar PIN</button>
+            <button data-toggle="modal" style="float: left;" data-target="#validarPinModal"
+              (click)="valPin($event) ; openModal('validarPinModal');" class="btn font-weight-bold btn-lg btn-danger"
+              type="submit">Validar PIN</button>
           </div>
         </div>
       </form>
@@ -81,5 +85,5 @@
   </div>
 </div>
 <app-modal-politicas></app-modal-politicas>
-<app-validar-pin [generar]="generar"></app-validar-pin>
+<app-validar-pin [generar]="generar" [valDatos]="valDatos"></app-validar-pin>
 <app-mensaje-ws></app-mensaje-ws>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { PinGenerar, PinValidar, Propiedad, Pin } from 'src/app/Models/pin';
+import { PinGenerar, PinValidar, Propiedad, Pin, datosValida } from 'src/app/Models/pin';
 import { ServicePinService } from '../../services/service-pin.service';
 
 @Component({
@@ -11,27 +11,46 @@ export class ValidarPinComponent implements OnInit {
 
   @Input() generar : PinGenerar;
 
+  @Input() valDatos : datosValida;
+
   titulo = 'Hemos enviado a tu correo electrónico un PIN de validación, confirma tu documento de identidad y luego el PIN:';
   @Output() respuesta : string ;
+  
+  validaFlux : boolean = false; 
 
   verificarCampos = { documento: '', pin: '', boton: false };
+
+  verDatos = { documento: '', mensaje: '', error: false };
+
+  tipoDoc = { select: '1', type: 'number' };
+
+  tiposDocumento = [
+
+    { nombre: 'C.C.', valor: '0' },
+    { nombre: 'C.E.', valor: '1' },
+    { nombre: 'Carnet diplomatico', valor: '2' },
+    { nombre: 'Pasaporte', valor: '3' },
+    { nombre: 'NIT', valor: '4' },
+
+  ];
 
   constructor(private servicePin: ServicePinService ) { }
 
   ngOnInit() {
   }
-
-
+  
   validarVacios(event) {
 
     if (this.verificarCampos.documento === '' || this.verificarCampos.pin === '') {
 
       this.verificarCampos.boton = false;
 
-
     } else {
-
-      this.verificarCampos.boton = true;
+      if(!this.validaFlux ){
+        this.verificarCampos.boton = this.generar.clienteId === this.valDatos.tipId;
+      }else{
+        this.verificarCampos.boton = true;
+      }
 
     }
 
@@ -57,9 +76,29 @@ export class ValidarPinComponent implements OnInit {
     modal.classList.remove("modal-open");
   }
 
+  valAcceso(){
+    
+    if(this.generar != undefined){
+      this.validaFlux = false;
+      if(this.generar.medioEnvioId === "1"){
+        this.titulo = 'Hemos enviado a tu teléfono un PIN de validación, confirma tu documento de identidad y luego el PIN:';
+      }
+      else if(this.generar.medioEnvioId == undefined){
+        this.titulo = "Ingrese el PIN que le ha sido enviado previamente." ;
+        this.validaFlux = true; 
+      }
+    }
+    return true;
+  }
+
   validatePin(modal1: string, modal2: string){
     let validar = {} as PinValidar ;
-    validar.clienteId = this.generar.clienteId ; 
+    if(this.validaFlux){
+      validar.clienteId = this.tiposDocumento[parseInt(this.tipoDoc.select)].nombre +
+                 this.verificarCampos.documento;
+    }else{
+      validar.clienteId = this.generar.clienteId ;
+    }
     validar.operacionId = this.generar.operacionId ;
     validar.pin = this.verificarCampos.pin ; 
     validar.propiedes = this.generar.propiedad ;  
@@ -73,7 +112,6 @@ export class ValidarPinComponent implements OnInit {
   }
 
   openModal (idModal: string){
-
     var modal = document.getElementById(idModal);
     modal.style.display = "block" ;
     modal.classList.remove("fade");

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ServicePinService } from '../../services/service-pin.service';
-import { Pin, PinGenerar, PinValidar, Propiedad } from '../../Models/pin';
+import { Pin, PinGenerar, PinValidar, Propiedad, datosValida } from '../../Models/pin';
 
 @Component({
   selector: 'app-form',
@@ -10,6 +10,7 @@ import { Pin, PinGenerar, PinValidar, Propiedad } from '../../Models/pin';
 export class FormComponent implements OnInit {
 
   generar: PinGenerar;
+  valDatos : datosValida;
   titulo = 'Selecciona la opción de validación y completa tus datos';
 
   tipoEnvio = '1';
@@ -88,6 +89,8 @@ export class FormComponent implements OnInit {
     prop2.nombre = "communicationOrigin";
     prop2.valor = "TCRM";
 
+    this.valDatos.numId = this.veriNumDoc.numero;
+    this.valDatos.tipId = this.tiposDocumento[parseInt(this.tipoDoc.select) - 1].nombre; 
     genera.clienteId = this.tiposDocumento[parseInt(this.tipoDoc.select) - 1].nombre + this.veriNumDoc.numero;
     genera.medioEnvioId = this.tipoEnvio;
     genera.operacionId = "341";
@@ -110,6 +113,30 @@ export class FormComponent implements OnInit {
     modal.classList.remove("fade");
     document.body.style.overflow = "hidden";
     modal.classList.add("modal-open");
+  }
+  
+  valPin(event){
+    var genera = {} as PinGenerar;
+    var prop1 = {} as Propiedad;
+    var prop2 = {} as Propiedad;
+    var propL = [] as Array<Propiedad>;
+
+    prop1.nombre = "profileId";
+    prop1.valor = "FRAUDECGW";
+    prop2.nombre = "communicationOrigin";
+    prop2.valor = "TCRM";
+
+    //genera.clienteId = this.tiposDocumento[parseInt(this.tipoDoc.select) - 1].nombre + this.veriNumDoc.numero;
+    //genera.medioEnvioId = this.tipoEnvio;
+    genera.operacionId = "341";
+
+    propL.push(prop1, prop2);
+    genera.propiedad = propL;
+    genera.sistemaId = "525";
+    //genera.vchDatoMedioEnvio = this.tipoEnvio == "1" ? this.veriSms.sms : this.veriCorreo.correo;
+    genera.vchUsuario = "userTest";
+
+    this.generar = genera;
   }
 
   valiCorreo(event) {
