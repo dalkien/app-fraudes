@@ -13,9 +13,9 @@ export class FormComponent implements OnInit {
   valDatos: datosValida;
   titulo = 'Selecciona la opción de validación y completa tus datos';
 
-  tipoEnvio = '1';
+  tipoEnvio = '0';
 
-  tipoDoc = { select: '1', type: 'number' };
+  tipoDoc = { select: '0', type: 'number' };
 
   habilitarEnvio = { tipoEnvio: false, documentoId: false, politicas: false, datos: false, boton: false };
 
@@ -33,7 +33,6 @@ export class FormComponent implements OnInit {
   ];
 
   tiposDocumento = [
-
     { nombre: 'C.C.', valor: '1' },
     { nombre: 'C.E.', valor: '2' },
     { nombre: 'Carnet diplomatico', valor: '3' },

@@ -3,9 +3,24 @@
     <div class="col-md-10 white p-5 my-5 rounded rounded-lg ">
       <h5 class="font-weight-bold mb-5 text-center">{{titulo}}</h5>
       <form action="" autocomplete="off">
-        <label class="h5" for="opcionEnvio">Selecciona una opción de envío de PIN</label>
+        <!-- <label class="h5 browser-default custom-select custom-select-lg red white-text" for="opcionDoc">Selecciona el tipo de documento</label> -->
+        <select (change)="cambioSelectTipoDoc($event)" [(ngModel)]="tipoDoc.select" id="opcionDoc" name="tipoDoc"
+          required class="h5 browser-default custom-select custom-select-lg red white-text">
+          <option value="0">Selecciona el tipo de documento</option>
+          <option class="white black-text" *ngFor="let doc of tiposDocumento" value={{doc.valor}}>
+            {{doc.nombre}}
+          </option>
+        </select>
+        <div class="md-form md-outline form-lg">
+          <input mdbInput (keyup)="valNumDocumento($event)" [(ngModel)]="veriNumDoc.numero" required id="cedula"
+            name="cedula" class="form-control form-control-lg" type="{{tipoDoc.type}}">
+          <label for="cedula">Número de documento</label>
+        </div>
+        <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriNumDoc.color}}">{{veriNumDoc.mensaje}}</h6>
+        <!-- <label class="h5" for="opcionEnvio">Selecciona una opción de envío de PIN</label> -->
         <select (change)="cambioSelectTipoEnvio($event)" [(ngModel)]="tipoEnvio" id="opcionEnvio" name="opcionEnvio"
-          required class="browser-default custom-select custom-select-lg red white-text">
+          required class="h5 browser-default custom-select custom-select-lg red white-text">
+          <option value="0">Selecciona una opción de envío de PIN</option>
           <option class="white black-text" *ngFor="let opcion of opcionesTipoEnvio" value={{opcion.valor}}>
             {{opcion.nombre}}
           </option>
@@ -31,24 +46,51 @@
             <label for="correo">Correo electrónico</label>
           </div>
           <div class="md-form md-outline form-lg">
+
             <input mdbInput (keypress)="validarEmail($event)" (keyup)="valiCorreo($event)"
               [(ngModel)]="veriCorreo.correoConfimar" required id="correoConf" name="correoConf"
               class="form-control form-control-lg" type="email">
             <label for="correoConf">Confirmar tu correo electrónico</label>
+
           </div>
           <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriCorreo.color}}">{{veriCorreo.mensaje}}</h6>
+
         </ng-template>
-        <label class="h5" for="opcionDoc">Selecciona el tipo de documento</label>
-        <select (change)="cambioSelectTipoDoc($event)" [(ngModel)]="tipoDoc.select" id="opcionDoc" name="tipoDoc"
-          required class="browser-default custom-select custom-select-lg red white-text">
-          <option class="white black-text" *ngFor="let doc of tiposDocumento" value={{doc.valor}}>
-            {{doc.nombre}}
-          </option>
-        </select>
-        <div class="md-form md-outline form-lg">
+        <label class="h5 browser-default custom-control custom-select-lg red white-text" for="opcionDoc">MIN asociados al
+          cliente</label>
+        <div class="col-md-8">
+          <div class="radio">
+            <label>
+              <input type="radio" name="opciones" id="opciones_1" value="opcion_1" checked>
+              3102234567
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="opciones" id="opciones_1" value="opcion_1" checked>
+              32098765432
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="opciones" id="opciones_1" value="opcion_1" checked>
+              31789765432
+            </label>
+          </div>
+        </div>
+
+        <!-- <div class="md-form md-outline form-lg">
           <input mdbInput (keyup)="valNumDocumento($event)" [(ngModel)]="veriNumDoc.numero" required id="cedula"
             name="cedula" class="form-control form-control-lg" type="{{tipoDoc.type}}">
           <label for="cedula">Número de documento</label>
+        </div>
+        <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriNumDoc.color}}">{{veriNumDoc.mensaje}}</h6> -->
+        <label class="h5 browser-default custom-control custom-select-lg red white-text" for="opcionDoc">Código
+          CVC*</label>
+        <div class="md-form md-outline form-lg">
+          <input mdbInput (keyup)="valNumDocumento($event)" [(ngModel)]="veriNumDoc.numero" required id="cedula"
+            name="cedula" class="form-control form-control-lg" type="{{tipoDoc.type}}">
+          <label for="cedula">Escribe aquí tu código CVC</label>
         </div>
         <h6 class="h6-responsive font-weight-bold mb-3 text-{{veriNumDoc.color}}">{{veriNumDoc.mensaje}}</h6>
         <div class="text-left">
@@ -71,9 +113,9 @@
           <div class="py-4">
             <button data-toggle="modal" style="float: left; margin-right: 10px;" data-target="#validarPinModal"
               [disabled]="!habilitarEnvio.boton" (click)="sendPin($event); openModal('validarPinModal');"
-              class="btn font-weight-bold btn-lg btn-danger" type="submit">Enviar PIN</button>
+              class="btn font-weight-bold btn-lg red white-text" type="submit">Enviar PIN</button>
             <button data-toggle="modal" style="float: left;" data-target="#validarPinModal"
-              (click)="valPin($event) ; openModal('validarPinModal');" class="btn font-weight-bold btn-lg btn-danger"
+              (click)="valPin($event) ; openModal('validarPinModal');" class="btn font-weight-bold btn-lg red white-text"
               type="submit">Validar PIN</button>
           </div>
         </div>
